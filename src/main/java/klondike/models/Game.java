@@ -27,7 +27,14 @@ public class Game {
         }
         this.piles = new ArrayList<Pile>();
         for (int i = 0; i < Game.NUMBER_OF_PILES; i++) {
-            this.piles.add(new Pile(i + 1, this.stock.takeTop(i + 1)));
+
+        	CardStack cardStack = new CardStack();
+        	List<Card> cards = this.stock.takeTop(i + 1);	
+        	for (Card card : cards) {
+				cardStack.push(card);
+			}
+        	
+            this.piles.add(new Pile(i + 1, cardStack));
         }
     }
 

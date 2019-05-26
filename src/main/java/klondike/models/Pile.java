@@ -4,63 +4,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Pile extends CardStack {
+public class Pile {
 
 	private final int number;
 
 	private int numberOfFaceUpCards;
+	
+	private CardStack cardStack;
 
-	public Pile(int number, List<Card> cards) {
-		assert cards.size() > 0;
+	public Pile(int number, CardStack cardStack) {
 		this.number = number;
 		this.numberOfFaceUpCards = 0;
-		this.cards.addAll(cards);
+		this.cardStack = cardStack;
 		this.flipFirstCard();
 	}
 
-	@Override
 	public void push(Card card) {
 		assert this.fitsIn(card);
-		super.push(card);
+		this.cardStack.push(card);
 		this.numberOfFaceUpCards++;
 	}
 
-	@Override
 	public Card pop() {
 		this.numberOfFaceUpCards--;
-		return super.pop();
+		return this.cardStack.pop();
 	}
 
 	private void flipFirstCard() {
-		assert !this.cards.empty() && this.numberOfFaceUpCards == 0 && !this.cards.peek().isFacedUp();
-		this.cards.peek().flip();
+		assert !this.getCards().empty() && this.numberOfFaceUpCards == 0 && !this.getCards().peek().isFacedUp();
+		this.getCards().peek().flip();
 		this.numberOfFaceUpCards++;
 	}
 
 	public boolean fitsIn(Card card) {
 		assert card != null;
-		return (this.cards.empty() && card.getNumber() == Number.KING) || (!this.cards.empty()
-				&& this.cards.peek().isNextTo(card) && this.cards.peek().getColor() != card.getColor());
+		return (this.getCards().empty() && card.getNumber() == Number.KING) || (!this.getCards().empty()
+				&& this.getCards().peek().isNextTo(card) && this.getCards().peek().getColor() != card.getColor());
 	}
 
 	public List<Card> getTop(int numberOfCards) {
 		assert numberOfCards <= this.numberOfFaceUpCards;
-		return new ArrayList<Card>(this.cards.subList(this.cards.size() - numberOfCards, this.cards.size()));
+		return new ArrayList<Card>(this.getCards().subList(this.getCards().size() - numberOfCards, this.getCards().size()));
 	}
 
 	public void addToTop(List<Card> cards) {
 		assert cards != null;
-		this.cards.addAll(cards);
+		this.getCards().addAll(cards);
 		this.numberOfFaceUpCards += cards.size();
 	}
 
 	public void removeTop(int numberOfCards) {
 		assert numberOfCards <= this.numberOfFaceUpCards;
 		for (int i = 0; i < numberOfCards; i++) {
-			this.cards.pop();
+			this.getCards().pop();
 			numberOfFaceUpCards--;
 		}
-		if (this.numberOfFaceUpCards == 0 && !this.cards.empty()) {
+		if (this.numberOfFaceUpCards == 0 && !this.getCards().empty()) {
 			flipFirstCard();
 		}
 	}
@@ -70,14 +69,18 @@ public class Pile extends CardStack {
 	}
 
 	public boolean empty() {
-		return this.cards.empty();
+		return this.getCards().empty();
 	}
 
 	public Stack<Card> getCards() {
-		return this.cards;
+		return this.cardStack.cards;
 	}
 
 	public int getNumber() {
 		return this.number;
+	}
+
+	public Card peek() {
+		return this.cardStack.peek();
 	}
 }
