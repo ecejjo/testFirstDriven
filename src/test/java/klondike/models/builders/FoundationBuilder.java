@@ -11,11 +11,11 @@ public class FoundationBuilder {
 
 	private Suit suit;
 	
-	private List<Card> cards;
+	private List<Card> cardsList;
 	
 	public FoundationBuilder() {
 		this.suit = Suit.CLOVERS;
-		this.cards = new ArrayList<Card>();
+		this.cardsList = new ArrayList<Card>();
 	}
 	
 	public FoundationBuilder suit(Suit suit) {
@@ -24,13 +24,13 @@ public class FoundationBuilder {
 	}
 	
 	public FoundationBuilder card(Card card) {
-		this.cards.add(card);
+		this.cardsList.add(card);
 		return this;
 	}
 	
 	public Foundation build() {
 		Foundation foundation = new Foundation(this.suit);
-		for(Card card: this.cards) {
+		for(Card card: this.cardsList) {
 			foundation.push(card);
 		}
 		return foundation;

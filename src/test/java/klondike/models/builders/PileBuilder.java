@@ -1,34 +1,35 @@
 package klondike.models.builders;
 
+import java.util.Stack;
+
 import klondike.models.Card;
-import klondike.models.CardStack;
 import klondike.models.Pile;
 
 public class PileBuilder {
 
-	private CardStack cardStack;
+	private Stack<Card> cardsStack;
 	
 	public PileBuilder() {
-		this.cardStack = new CardStack();
+		this.cardsStack = new Stack<Card>();
 	}
 	
 	public PileBuilder card(Card card) {
-		this.cardStack.push(card);
+		this.cardsStack.push(card);
 		return this;
 	}
 	
 	public PileBuilder card() {
-		this.cardStack.push(new CardBuilder().build());
+		this.cardsStack.push(new CardBuilder().build());
 		return this;
 	}
 	
 	public Pile build() {
-		if (this.cardStack.empty()) {
-			this.cardStack.push(new CardBuilder().build());
-			Pile pile = new Pile(0, this.cardStack);
+		if (this.cardsStack.empty()) {
+			this.cardsStack.push(new CardBuilder().build());
+			Pile pile = new Pile(0, this.cardsStack);
 			pile.pop();
 			return pile;
 		}
-		return new Pile(0, this.cardStack);
+		return new Pile(0, this.cardsStack);
 	}
 }

@@ -20,10 +20,10 @@ public class StockTest {
 	}
 	
 	protected List<Card> getCards(){
-		List<Card> cards = new ArrayList<Card>();
-		cards.add(new CardBuilder().build());
-		cards.add(new CardBuilder().build());
-		return cards;
+		List<Card> cardsList = new ArrayList<Card>();
+		cardsList.add(new CardBuilder().build());
+		cardsList.add(new CardBuilder().build());
+		return cardsList;
 	}
 	
 	private static final int NUMBER_CARDS = Number.values().length * Suit.values().length;

@@ -10,24 +10,24 @@ public class Pile {
 
 	private int numberOfFaceUpCards;
 	
-	private CardStack cardStack;
+	private Stack<Card> cardsStack;
 
-	public Pile(int number, CardStack cardStack) {
+	public Pile(int number, Stack<Card> cardsStack) {
 		this.number = number;
 		this.numberOfFaceUpCards = 0;
-		this.cardStack = cardStack;
+		this.cardsStack = cardsStack;
 		this.flipFirstCard();
 	}
 
 	public void push(Card card) {
 		assert this.fitsIn(card);
-		this.cardStack.push(card);
+		this.cardsStack.push(card);
 		this.numberOfFaceUpCards++;
 	}
 
 	public Card pop() {
 		this.numberOfFaceUpCards--;
-		return this.cardStack.pop();
+		return this.cardsStack.pop();
 	}
 
 	private void flipFirstCard() {
@@ -47,10 +47,10 @@ public class Pile {
 		return new ArrayList<Card>(this.getCards().subList(this.getCards().size() - numberOfCards, this.getCards().size()));
 	}
 
-	public void addToTop(List<Card> cards) {
-		assert cards != null;
-		this.getCards().addAll(cards);
-		this.numberOfFaceUpCards += cards.size();
+	public void addToTop(List<Card> cardsList) {
+		assert cardsList != null;
+		this.getCards().addAll(cardsList);
+		this.numberOfFaceUpCards += cardsList.size();
 	}
 
 	public void removeTop(int numberOfCards) {
@@ -73,7 +73,7 @@ public class Pile {
 	}
 
 	public Stack<Card> getCards() {
-		return this.cardStack.cards;
+		return this.cardsStack;
 	}
 
 	public int getNumber() {
@@ -81,6 +81,6 @@ public class Pile {
 	}
 
 	public Card peek() {
-		return this.cardStack.peek();
+		return this.cardsStack.peek();
 	}
 }

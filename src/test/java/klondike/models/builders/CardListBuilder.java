@@ -7,19 +7,19 @@ import klondike.models.Card;
 
 public class CardListBuilder {
 
-	private List<Card> cards;
+	private List<Card> cardsList;
 	
 	public CardListBuilder() {
-		this.cards = new ArrayList<Card>();
+		this.cardsList = new ArrayList<Card>();
 	}
 	
 	public CardListBuilder card(Card card) {
-		this.cards.add(card);
+		this.cardsList.add(card);
 		return this;
 	}
 	
 	public List<Card> build(){
-		return this.cards;
+		return this.cardsList;
 	}
 	
 }

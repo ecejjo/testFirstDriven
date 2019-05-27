@@ -28,13 +28,13 @@ public class Game {
         this.piles = new ArrayList<Pile>();
         for (int i = 0; i < Game.NUMBER_OF_PILES; i++) {
 
-        	CardStack cardStack = new CardStack();
-        	List<Card> cards = this.stock.takeTop(i + 1);	
-        	for (Card card : cards) {
-				cardStack.push(card);
+        	Stack<Card> cardsStack = new Stack<Card>();
+        	List<Card> cardsList = this.stock.takeTop(i + 1);	
+        	for (Card card : cardsList) {
+				cardsStack.push(card);
 			}
         	
-            this.piles.add(new Pile(i + 1, cardStack));
+            this.piles.add(new Pile(i + 1, cardsStack));
         }
     }
 
@@ -141,12 +141,12 @@ public class Game {
         if (originPile.numberOfFaceUpCards() < numberOfCards) {
             return Error.NO_ENOUGH_CARDS_PILE;
         }
-        List<Card> cards = originPile.getTop(numberOfCards);
-        if (!destinationPile.fitsIn(cards.get(cards.size() - 1))) {
+        List<Card> cardsList = originPile.getTop(numberOfCards);
+        if (!destinationPile.fitsIn(cardsList.get(cardsList.size() - 1))) {
             return Error.NO_FIT_PILE;
         }
         originPile.removeTop(numberOfCards);
-        destinationPile.addToTop(cards);
+        destinationPile.addToTop(cardsList);
         return null;
     }
 

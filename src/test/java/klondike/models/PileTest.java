@@ -20,10 +20,10 @@ public class PileTest {
 	}
 
 	protected List<Card> getCards() {
-		List<Card> cards = new ArrayList<Card>();
-		cards.add(new CardBuilder().number(Number.KING).suit(Suit.CLOVERS).facedUp().build());
-		cards.add(new CardBuilder().number(Number.QUEEN).suit(Suit.DIAMONDS).facedUp().build());
-		return cards;
+		List<Card> cardsList = new ArrayList<Card>();
+		cardsList.add(new CardBuilder().number(Number.KING).suit(Suit.CLOVERS).facedUp().build());
+		cardsList.add(new CardBuilder().number(Number.QUEEN).suit(Suit.DIAMONDS).facedUp().build());
+		return cardsList;
 	}
 
 	@Test
