@@ -122,12 +122,11 @@ public class Game {
         if (pile.empty()) {
             return Error.EMPTY_PILE;
         }
-        Card card = pile.getTop(1).get(0);
+        Card card = pile.peek();
         if (!foundation.fitsIn(card)) {
             return Error.NO_FIT_FOUNDATION;
         }
-        foundation.push(card);
-        pile.removeTop(1);
+        foundation.push(pile.pop());
         return null;
     }
 

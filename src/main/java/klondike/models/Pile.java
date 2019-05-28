@@ -26,8 +26,12 @@ public class Pile {
 	}
 
 	public Card pop() {
+		Card card = this.cardsStack.pop();
 		this.numberOfFaceUpCards--;
-		return this.cardsStack.pop();
+		if (this.numberOfFaceUpCards == 0 && !this.getCards().empty()) {
+			flipFirstCard();
+		}
+		return card;
 	}
 
 	private void flipFirstCard() {
@@ -45,17 +49,6 @@ public class Pile {
 	public List<Card> getTop(int numberOfCards) {
 		assert numberOfCards <= this.numberOfFaceUpCards;
 		return new ArrayList<Card>(this.getCards().subList(this.getCards().size() - numberOfCards, this.getCards().size()));
-	}
-
-	public void removeTop(int numberOfCards) {
-		assert numberOfCards <= this.numberOfFaceUpCards;
-		for (int i = 0; i < numberOfCards; i++) {
-			this.getCards().pop();
-			numberOfFaceUpCards--;
-		}
-		if (this.numberOfFaceUpCards == 0 && !this.getCards().empty()) {
-			flipFirstCard();
-		}
 	}
 
 	public int numberOfFaceUpCards() {
