@@ -47,12 +47,6 @@ public class Pile {
 		return new ArrayList<Card>(this.getCards().subList(this.getCards().size() - numberOfCards, this.getCards().size()));
 	}
 
-	public void addToTop(List<Card> cardsList) {
-		assert cardsList != null;
-		this.getCards().addAll(cardsList);
-		this.numberOfFaceUpCards += cardsList.size();
-	}
-
 	public void removeTop(int numberOfCards) {
 		assert numberOfCards <= this.numberOfFaceUpCards;
 		for (int i = 0; i < numberOfCards; i++) {

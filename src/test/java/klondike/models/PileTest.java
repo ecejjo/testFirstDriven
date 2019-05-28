@@ -75,20 +75,6 @@ public class PileTest {
 	}
 
 	@Test
-	public void testAddToTop() {
-		Pile pile = new PileBuilder().card()
-				.card(new CardBuilder().number(Number.TEN).suit(Suit.DIAMONDS).build()).build();
-		Card topCard = pile.peek();
-		List<Card> cards = new CardListBuilder()
-				.card(new CardBuilder().number(Number.NINE).suit(Suit.CLOVERS).facedUp().build())
-				.card(new CardBuilder().number(Number.EIGHT).suit(Suit.DIAMONDS).facedUp().build())
-				.card(new CardBuilder().number(Number.SEVEN).suit(Suit.PIKES).facedUp().build()).build();
-		pile.addToTop(cards);
-		cards.add(0, topCard);
-		assertEquals(cards, pile.getTop(cards.size()));
-	}
-
-	@Test
 	public void testRemoveTop() {
 		Pile pile = new PileBuilder().card()
 				.card(new CardBuilder().number(Number.TEN).suit(Suit.DIAMONDS).build()).build();
