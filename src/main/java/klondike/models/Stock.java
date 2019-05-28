@@ -1,8 +1,6 @@
 package klondike.models;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Stack;
 
 public class Stock {
@@ -19,10 +17,14 @@ public class Stock {
         Collections.shuffle(this.cardsStack);
     }
 
-    public List<Card> takeTop(int quantity) {
-        assert 0 < quantity && quantity <= this.cardsStack.size();
-        List<Card> cardsToReturn = new ArrayList<Card>(this.cardsStack.subList(0, quantity));
-        this.cardsStack.removeAll(cardsToReturn);
+    public Stack<Card> pop(int quantity) {
+        assert quantity > 0;
+        assert quantity <= this.cardsStack.size();
+        
+        Stack<Card> cardsToReturn = new Stack<Card>();
+        for (int i = 0; i < quantity; i++) {
+			cardsToReturn.push(this.cardsStack.pop());
+		}
         return cardsToReturn;
     }
 

@@ -21,22 +21,24 @@ public class Game {
     public void clear() {
         this.stock = new Stock();
         this.waste = new Waste();
+        clearFoundations();
+        clearPiles();
+    }
+    
+    private void clearFoundations() {
         this.foundations = new HashMap<Suit, Foundation>();
         for (Suit suit : Suit.values()) {
             this.foundations.put(suit, new Foundation(suit));
         }
-        this.piles = new ArrayList<Pile>();
+    }
+    
+	private void clearPiles() {
+		this.piles = new ArrayList<Pile>();
         for (int i = 0; i < Game.NUMBER_OF_PILES; i++) {
-
-        	Stack<Card> cardsStack = new Stack<Card>();
-        	List<Card> cardsList = this.stock.takeTop(i + 1);	
-        	for (Card card : cardsList) {
-				cardsStack.push(card);
-			}
-        	
+        	Stack<Card> cardsStack = this.stock.pop(i + 1);
             this.piles.add(new Pile(i + 1, cardsStack));
         }
-    }
+	}
 
     public boolean isFinished() {
         for (Suit suit : Suit.values()) {
