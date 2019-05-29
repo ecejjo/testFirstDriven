@@ -35,7 +35,9 @@ public class Pile {
 	}
 
 	private void flipFirstCard() {
-		assert !this.getCards().empty() && this.numberOfFaceUpCards == 0 && !this.getCards().peek().isFacedUp();
+		assert ! this.getCards().empty();
+		assert this.numberOfFaceUpCards == 0;
+		assert ! this.getCards().peek().isFacedUp();
 		this.getCards().peek().flip();
 		this.numberOfFaceUpCards++;
 	}
