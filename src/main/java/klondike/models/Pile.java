@@ -28,29 +28,29 @@ public class Pile {
 	public Card pop() {
 		Card card = this.cardsStack.pop();
 		this.numberOfFaceUpCards--;
-		if (this.numberOfFaceUpCards == 0 && !this.getCards().empty()) {
+		if (this.numberOfFaceUpCards == 0 && !this.cardsStack.empty()) {
 			flipFirstCard();
 		}
 		return card;
 	}
 
 	private void flipFirstCard() {
-		assert ! this.getCards().empty();
+		assert ! this.cardsStack.empty();
 		assert this.numberOfFaceUpCards == 0;
-		assert ! this.getCards().peek().isFacedUp();
-		this.getCards().peek().flip();
+		assert ! this.cardsStack.peek().isFacedUp();
+		this.cardsStack.peek().flip();
 		this.numberOfFaceUpCards++;
 	}
 
 	public boolean fitsIn(Card card) {
 		assert card != null;
-		if (	this.getCards().empty() &&
+		if (	this.cardsStack.empty() &&
 				card.getNumber() == Number.KING) {
 			return true;
 		}
-		if ( ! this.getCards().empty() &&
-				this.getCards().peek().isNextTo(card) &&
-				this.getCards().peek().getColor() != card.getColor()) {
+		if ( ! this.cardsStack.empty() &&
+				this.cardsStack.peek().isNextTo(card) &&
+				this.cardsStack.peek().getColor() != card.getColor()) {
 					return true;
 		}
 		return false;
@@ -58,7 +58,9 @@ public class Pile {
 
 	public List<Card> getTop(int numberOfCards) {
 		assert numberOfCards <= this.numberOfFaceUpCards;
-		return new ArrayList<Card>(this.getCards().subList(this.getCards().size() - numberOfCards, this.getCards().size()));
+		int fromIndex = this.cardsStack.size() - numberOfCards;
+		int toIndex = this.cardsStack.size();
+		return new ArrayList<Card>(this.cardsStack.subList(fromIndex, toIndex));
 	}
 
 	public int numberOfFaceUpCards() {
@@ -66,7 +68,7 @@ public class Pile {
 	}
 
 	public boolean empty() {
-		return this.getCards().empty();
+		return this.cardsStack.empty();
 	}
 
 	public Stack<Card> getCards() {
