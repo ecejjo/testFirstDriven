@@ -42,8 +42,16 @@ public class Pile {
 
 	public boolean fitsIn(Card card) {
 		assert card != null;
-		return (this.getCards().empty() && card.getNumber() == Number.KING) || (!this.getCards().empty()
-				&& this.getCards().peek().isNextTo(card) && this.getCards().peek().getColor() != card.getColor());
+		if (	this.getCards().empty() &&
+				card.getNumber() == Number.KING) {
+			return true;
+		}
+		if ( ! this.getCards().empty() &&
+				this.getCards().peek().isNextTo(card) &&
+				this.getCards().peek().getColor() != card.getColor()) {
+					return true;
+		}
+		return false;
 	}
 
 	public List<Card> getTop(int numberOfCards) {
