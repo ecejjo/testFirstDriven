@@ -57,10 +57,12 @@ public class Pile {
 	}
 
 	public List<Card> getTop(int numberOfCards) {
-		assert numberOfCards <= this.numberOfFaceUpCards;
-		int fromIndex = this.cardsStack.size() - numberOfCards;
-		int toIndex = this.cardsStack.size();
-		return new ArrayList<Card>(this.cardsStack.subList(fromIndex, toIndex));
+		assert numberOfCards <= this.numberOfFaceUpCards;		
+		ArrayList<Card> arrayList = new ArrayList<Card>();
+		for (int i = 0; i < numberOfCards; i++) {
+			arrayList.add(0, this.pop());
+		}
+		return arrayList;
 	}
 
 	public int numberOfFaceUpCards() {
