@@ -15,10 +15,6 @@ public class Game {
     private List<Pile> piles;
 
     public Game() {
-        this.clear();
-    }
-
-    public void clear() {
         this.stock = new Stock();
         this.waste = new Waste();
         clearFoundations();
