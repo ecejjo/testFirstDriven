@@ -123,6 +123,7 @@ public class Game {
             return Error.NO_FIT_FOUNDATION;
         }
         foundation.push(pile.pop());
+        pile.faceUpFirstCard();
         return null;
     }
 
@@ -148,6 +149,7 @@ public class Game {
         
         for (int i = 0; i < numberOfCards; i++) {
 			destinationPile.push(originPile.pop());
+			originPile.faceUpFirstCard();
 		}
         return null;
     }

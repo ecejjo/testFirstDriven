@@ -16,7 +16,7 @@ public class Pile {
 		this.number = number;
 		this.numberOfFaceUpCards = 0;
 		this.cardsStack = cardsStack;
-		this.flipFirstCard();
+		this.faceUpFirstCard();
 	}
 
 	public void push(Card card) {
@@ -26,18 +26,15 @@ public class Pile {
 	}
 
 	public Card pop() {
-		Card card = this.cardsStack.pop();
 		this.numberOfFaceUpCards--;
-		if (this.numberOfFaceUpCards == 0 && !this.cardsStack.empty()) {
-			flipFirstCard();
-		}
-		return card;
+		return this.cardsStack.pop();
 	}
 
-	private void flipFirstCard() {
-		assert ! this.cardsStack.empty();
-		assert this.numberOfFaceUpCards == 0;
-		assert ! this.cardsStack.peek().isFacedUp();
+	public void faceUpFirstCard() {
+		if (this.empty() ||
+			this.cardsStack.peek().isFacedUp()) {
+			return;
+		}
 		this.cardsStack.peek().flip();
 		this.numberOfFaceUpCards++;
 	}
@@ -61,6 +58,7 @@ public class Pile {
 		ArrayList<Card> arrayList = new ArrayList<Card>();
 		for (int i = 0; i < numberOfCards; i++) {
 			arrayList.add(0, this.pop());
+			this.faceUpFirstCard();
 		}
 		return arrayList;
 	}
