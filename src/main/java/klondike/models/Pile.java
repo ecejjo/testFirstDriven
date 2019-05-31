@@ -7,14 +7,11 @@ import java.util.Stack;
 public class Pile {
 
 	private final int number;
-
-	private int numberOfFaceUpCards;
 	
 	private Stack<Card> cardsStack;
 
 	public Pile(int number, Stack<Card> cardsStack) {
 		this.number = number;
-		this.numberOfFaceUpCards = 0;
 		this.cardsStack = cardsStack;
 		this.faceUpFirstCard();
 	}
@@ -22,11 +19,9 @@ public class Pile {
 	public void push(Card card) {
 		assert this.fitsIn(card);
 		this.cardsStack.push(card);
-		this.numberOfFaceUpCards++;
 	}
 
 	public Card pop() {
-		this.numberOfFaceUpCards--;
 		return this.cardsStack.pop();
 	}
 
@@ -36,7 +31,6 @@ public class Pile {
 			return;
 		}
 		this.cardsStack.peek().flip();
-		this.numberOfFaceUpCards++;
 	}
 
 	public boolean fitsIn(Card card) {
@@ -54,17 +48,13 @@ public class Pile {
 	}
 
 	public List<Card> getTop(int numberOfCards) {
-		assert numberOfCards <= this.numberOfFaceUpCards;		
+		assert this.cardsStack.get(numberOfCards - 1).isFacedUp();
 		ArrayList<Card> arrayList = new ArrayList<Card>();
 		for (int i = 0; i < numberOfCards; i++) {
 			arrayList.add(0, this.pop());
-			this.faceUpFirstCard();
 		}
+		this.faceUpFirstCard();
 		return arrayList;
-	}
-
-	public int numberOfFaceUpCards() {
-		return this.numberOfFaceUpCards;
 	}
 
 	public boolean empty() {
@@ -81,5 +71,14 @@ public class Pile {
 
 	public Card peek() {
 		return this.cardsStack.peek();
+	}
+
+	public int numberOfFaceUpCards() {
+		for (int i = 0; i < this.cardsStack.size(); i++) {
+			if ( ! this.cardsStack.get(i).isFacedUp()) {
+				return i;
+			}
+		}
+		return 0;
 	}
 }

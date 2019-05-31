@@ -46,6 +46,7 @@ public class PileTest {
 	@Test(expected = AssertionError.class)
 	public void testGetTopOneWrongIsNotFaceUp() {
 		Pile pile = new PileBuilder().card().card().build();
+		pile.getCards().get(1).flip();
 		pile.getTop(2);
 	}
 
